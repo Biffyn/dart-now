@@ -26,7 +26,10 @@ export class XmlInterceptor implements HttpInterceptor {
           if (this.xml.validate(event.body) !== true) {
             return event;
           }
-          const body = JSON.parse(JSON.stringify(this.xml.parse(event.body)));
+          let body = JSON.parse(JSON.stringify(this.xml.parse(event.body)));
+          body = body.ArrayOfObjStationData
+            ? body.ArrayOfObjStationData.objStationData
+            : body.ArrayOfObjStation.objStation;
           return event.clone({ body });
         },
         (error) => event

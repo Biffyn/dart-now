@@ -10,6 +10,7 @@ export class AppComponent {
   title = 'dart-now';
 
   constructor(private service: TrainTimesService) {
-    this.service.getStationData();
+    this.service.getStationData('mhide').subscribe((st) => console.log(st));
+    this.service.getAllDartStations().subscribe((st) => console.log(st));
   }
 }
